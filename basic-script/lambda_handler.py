@@ -19,6 +19,7 @@ def strings(l):
 
 def lambda_handler(event, context):
     
+    arn = "<ARN for the SNS Topic>"
     dct = dict()
     dct["value"]=event
     dct = json.loads(json.dumps(dct))
@@ -43,7 +44,7 @@ def lambda_handler(event, context):
         print message
         SNS = boto3.client("sns", region_name='eu-west-1')
         print SNS.publish(
-                TopicArn="arn:aws:sns:eu-west-1:538411234227:Terminate-Instance-Notification",
+                TopicArn=arn,
                 Message=message,
                 Subject=subject
             )
